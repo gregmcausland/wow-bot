@@ -1,0 +1,18 @@
+[Unit]
+Description=WoW Discord agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/Projects/wow-bot
+# Replace with the absolute path printed by: command -v node
+ExecStart=/usr/bin/node --env-file-if-exists=.env dist/index.js
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=120
+UMask=0077
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target
